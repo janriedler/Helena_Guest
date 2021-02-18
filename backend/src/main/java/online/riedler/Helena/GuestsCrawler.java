@@ -33,6 +33,10 @@ public class GuestsCrawler {
                 new BeanPropertyRowMapper<>(Guest.class));
     }
 
+    public int deleteID(Long id) {
+        return jtm.update("DELETE FROM guests WHERE id = ?", id);
+    }
+
     public int deleteAll() {
         return jtm.update( "delete from guests");
     }

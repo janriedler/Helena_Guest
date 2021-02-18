@@ -82,4 +82,11 @@ public class controller {
         return guestsCrawler.findById(Long.parseLong(id));
 
     }
+
+    @RequestMapping(value = "/delID", method = RequestMethod.GET)
+    @ResponseBody
+    public int delID(@RequestParam String id){
+        return guestsCrawler.deleteID(Long.parseLong(id));
+
+    }
 }
