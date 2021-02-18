@@ -3,6 +3,7 @@ package online.riedler.Helena;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -12,16 +13,17 @@ import java.io.IOException;
 import java.util.List;
 
 
-@RestController()
+@Controller()
 public class controller {
 
     @Autowired
     private GuestsCrawler guestsCrawler;
 
 
-    @GetMapping(value = {"/"})
-    @ResponseBody
+    @RequestMapping(value = {"/"})
+    //@ResponseBody
     public String homePage() {
+        /**
         StringBuilder erg = new StringBuilder();
         try {
             File file = new File("backend/src/main/resources/public/index.html");
@@ -34,9 +36,12 @@ public class controller {
             e.printStackTrace();
         }
         return erg.toString();
+    */
+    return "index.html";
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @ResponseBody
     public List<Guest> findCities(@RequestParam String sort) {
         if (sort.equals("namen")) {
             return guestsCrawler.findAllName();
@@ -50,6 +55,7 @@ public class controller {
     }
 
     @RequestMapping("/del")
+    @ResponseBody
     public int del() {
         return guestsCrawler.deleteAll();
     }
